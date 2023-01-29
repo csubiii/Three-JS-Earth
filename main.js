@@ -24,13 +24,12 @@ const sizes = {
 
 //Light
 const light = new THREE.PointLight(0xffff, 1, 100)
-light.position.set(0, 15, 9)
-light.intensity = 1.25
+light.position.set(8.01, 10.84, 9.89)
 scene.add(light)
 
 //Camera 
 const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.5, 100)
-camera.position.z = 20
+camera.position.z = 19
 scene.add(camera)
 
 //Render 
@@ -42,6 +41,12 @@ renderer.render(scene, camera)
 
 //Controls
 const controls = new OrbitControls(camera,canvas)
+controls.enableDamping = true
+controls.enablePan = false
+controls.enableZoom = false
+controls.autoRotate = true
+controls.autoRotateSpeed = 4
+
 
 //Resize
 window.addEventListener('resize', () => {
@@ -54,3 +59,11 @@ window.addEventListener('resize', () => {
   camera.aspect = sizes.width / sizes.height
   renderer.setSize(sizes.width, sizes.height)
 })
+
+//Loop
+const loop = () => {
+  controls.update()
+  renderer.render(scene, camera)
+  window.requestAnimationFrame(loop)
+}
+loop()
