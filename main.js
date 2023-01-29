@@ -20,7 +20,15 @@ const sizes = {
   height: window.innerHeight,
 }
 
+//Light
+const light = new THREE.PointLight(0xffff, 1, 100)
+light.position.set(0, 15, 9)
+light.intensity = 1.25
+scene.add(light)
+
 //Camera 
 const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.5, 100)
 camera.position.z = 20
 scene.add(camera)
+
+
