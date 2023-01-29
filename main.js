@@ -13,3 +13,14 @@ const material = new THREE.MeshStandardMaterial({
 
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh)
+
+//Sizes
+const sizes = {
+  width: window.innerWidth,
+  height: window.innerHeight,
+}
+
+//Camera 
+const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.5, 100)
+camera.position.z = 20
+scene.add(camera)
