@@ -1,5 +1,7 @@
 import './style.css'
 import * as THREE from "three";
+import gsap from "gsap";
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 
 //Scene
 const scene = new THREE.Scene();
@@ -37,3 +39,18 @@ const renderer = new THREE.WebGLRenderer({ canvas })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(2)
 renderer.render(scene, camera)
+
+//Controls
+const controls = new OrbitControls(camera,canvas)
+
+//Resize
+window.addEventListener('resize', () => {
+  //Update sizes
+  sizes.width = window.innerWidth
+  sizes.height = window.innerHeight
+
+  //Update Camera
+  camera.updateProjectionMatrix()
+  camera.aspect = sizes.width / sizes.height
+  renderer.setSize(sizes.width, sizes.height)
+})
