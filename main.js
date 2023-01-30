@@ -10,8 +10,8 @@ const scene = new THREE.Scene();
 
 /*const loader = new THREE.TextureLoader();
 const material = new THREE.MeshPhongMaterial()({
-  map: loader.load('./public/7MXox.jpg'),
-  bumpMap: loader.load('./public/dG4sE.jpg'),
+  map: loader.load('/7MXox.jpg'),
+  bumpMap: loader.load('/dG4sE.jpg'),
   bumpScale: 0.015,
 });*/
 
@@ -19,21 +19,21 @@ const geometry = new THREE.SphereGeometry(3, 64, 64)
 
 const material = new THREE.MeshPhongMaterial()
 
-const texture = new THREE.TextureLoader().load('./public/7MXox.jpg')
+const texture = new THREE.TextureLoader().load('/earthtexture.jpg')
 material.map = texture
 
-const bumpTexture = new THREE.TextureLoader().load('./public/dG4sE.jpg')
+const bumpTexture = new THREE.TextureLoader().load('/bump.jpg')
 material.bumpMap = bumpTexture
 material.bumpScale = 0.1
 
-const specularTexture = new THREE.TextureLoader().load('./public/3tqI6.jpg')
+const specularTexture = new THREE.TextureLoader().load('/specularjpg')
 material.specularMap = specularTexture
 material.specular = new THREE.Color('#eaf1f8')
 
 //Cloud
 const cloudGeometry = new THREE.SphereGeometry(3.01, 60, 60)
 const cloudMaterial = new THREE.MeshBasicMaterial()
-const cloudTexture = new THREE.TextureLoader().load('./public/ngioK.jpg')
+const cloudTexture = new THREE.TextureLoader().load('/cloud.jpg')
 cloudMaterial.map = cloudTexture
 cloudMaterial.side = THREE.DoubleSide
 cloudMaterial.opacity = 0.04
@@ -95,6 +95,6 @@ const loop = () => {
   controls.update()
   renderer.render(scene, camera)
   window.requestAnimationFrame(loop)
-  cloudMesh.rotation.y += 0.01 / 10;
+  cloudMesh.rotation.y += 0.01 / 9;
 }
 loop()
