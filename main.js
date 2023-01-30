@@ -22,9 +22,13 @@ material.map = texture
 
 const bumpTexture = new THREE.TextureLoader().load('./public/dG4sE.jpg')
 material.bumpMap = bumpTexture
-material.bumpScale = 0.05
+material.bumpScale = 0.1
 
-const mesh = new THREE.Mesh(geometry, material,);
+const specularTexture = new THREE.TextureLoader().load('./public/3tqI6.jpg')
+material.specularMap = specularTexture
+material.specular = new THREE.Color('#eaf1f8')
+
+const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh)
 
 //Sizes
@@ -35,9 +39,8 @@ const sizes = {
 
 //Light
 const light = new THREE.PointLight( 0xffffff, 1, 0 );
-light.position.set( 0, 200, 0 );
+light.position.set( 0, 500, 0 );
 scene.add(light)
-
 
 //Camera 
 const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.5, 100)
@@ -57,7 +60,8 @@ controls.enableDamping = true
 controls.enablePan = false
 controls.enableZoom = true
 controls.autoRotate = true
-controls.autoRotateSpeed = 1.5
+controls.autoRotateSpeed = 2
+controls.maxPolarAngle = 1
 
 //Resize
 window.addEventListener('resize', () => {
