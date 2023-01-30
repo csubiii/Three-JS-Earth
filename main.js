@@ -1,6 +1,5 @@
 import './style.css'
 import * as THREE from "three";
-import gsap from "gsap";
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 
 //Scene
@@ -8,15 +7,25 @@ const scene = new THREE.Scene();
 
 //Sphere
 const geometry = new THREE.SphereGeometry(3, 64, 64)
-const loader = new THREE.TextureLoader();
+/*const loader = new THREE.TextureLoader();
  
-const material = new THREE.MeshBasicMaterial({
+const material = new THREE.MeshPhongMaterial()({
   map: loader.load('./public/7MXox.jpg'),
-});
+  bumpMap: loader.load('./public/dG4sE.jpg'),
+  bumpScale: 0.015,
+});*/
 
-const mesh = new THREE.Mesh(geometry, material);
+const material = new THREE.MeshPhongMaterial()
+
+const texture = new THREE.TextureLoader().load('./public/7MXox.jpg')
+material.map = texture
+
+const bumpTexture = new THREE.TextureLoader().load('./public/dG4sE.jpg')
+material.bumpMap = bumpTexture
+material.bumpScale = 0.05
+
+const mesh = new THREE.Mesh(geometry, material,);
 scene.add(mesh)
-
 
 //Sizes
 const sizes = {
@@ -25,13 +34,13 @@ const sizes = {
 }
 
 //Light
-const light = new THREE.PointLight(0xffff, 1, 100)
-light.position.set(8.01, 10.84, 9.89)
+const light = new THREE.PointLight( 0xffffff, 1, 0 );
+light.position.set( 0, 200, 0 );
 scene.add(light)
 
 
 //Camera 
-const camera = new THREE.PerspectiveCamera(35, sizes.width / sizes.height, 0.5, 100)
+const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.5, 100)
 camera.position.z = 19
 scene.add(camera)
 
@@ -46,7 +55,7 @@ renderer.render(scene, camera)
 const controls = new OrbitControls(camera,canvas)
 controls.enableDamping = true
 controls.enablePan = false
-controls.enableZoom = false
+controls.enableZoom = true
 controls.autoRotate = true
 controls.autoRotateSpeed = 1.5
 
