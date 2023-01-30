@@ -5,15 +5,17 @@ import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 //Scene
 const scene = new THREE.Scene();
 
+
 //Sphere
-const geometry = new THREE.SphereGeometry(3, 64, 64)
+
 /*const loader = new THREE.TextureLoader();
- 
 const material = new THREE.MeshPhongMaterial()({
   map: loader.load('./public/7MXox.jpg'),
   bumpMap: loader.load('./public/dG4sE.jpg'),
   bumpScale: 0.015,
 });*/
+
+const geometry = new THREE.SphereGeometry(3, 64, 64)
 
 const material = new THREE.MeshPhongMaterial()
 
@@ -28,8 +30,22 @@ const specularTexture = new THREE.TextureLoader().load('./public/3tqI6.jpg')
 material.specularMap = specularTexture
 material.specular = new THREE.Color('#eaf1f8')
 
+//Cloud
+const cloudGeometry = new THREE.SphereGeometry(3.01, 60, 60)
+const cloudMaterial = new THREE.MeshBasicMaterial()
+const cloudTexture = new THREE.TextureLoader().load('./public/ngioK.jpg')
+cloudMaterial.map = cloudTexture
+cloudMaterial.side = THREE.DoubleSide
+cloudMaterial.opacity = 0.04
+cloudMaterial.transparent = true
+cloudMaterial.depthWrite = false
+
+const cloudMesh = new THREE.Mesh(cloudGeometry, cloudMaterial)
+
+//Mesh
 const mesh = new THREE.Mesh(geometry, material);
-scene.add(mesh)
+scene.add(mesh, cloudMesh)
+
 
 //Sizes
 const sizes = {
@@ -60,8 +76,7 @@ controls.enableDamping = true
 controls.enablePan = false
 controls.enableZoom = true
 controls.autoRotate = true
-controls.autoRotateSpeed = 2
-controls.maxPolarAngle = 1
+controls.autoRotateSpeed = 1
 
 //Resize
 window.addEventListener('resize', () => {
@@ -80,5 +95,6 @@ const loop = () => {
   controls.update()
   renderer.render(scene, camera)
   window.requestAnimationFrame(loop)
+  cloudMesh.rotation.y += 0.01 / 10;
 }
 loop()
