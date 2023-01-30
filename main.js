@@ -8,13 +8,15 @@ const scene = new THREE.Scene();
 
 //Sphere
 const geometry = new THREE.SphereGeometry(3, 64, 64)
-const material = new THREE.MeshStandardMaterial({
-  color: "#0080ff",
-  roughness: 0.1
-})
+const loader = new THREE.TextureLoader();
+ 
+const material = new THREE.MeshBasicMaterial({
+  map: loader.load('./public/7MXox.jpg'),
+});
 
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh)
+
 
 //Sizes
 const sizes = {
@@ -27,8 +29,9 @@ const light = new THREE.PointLight(0xffff, 1, 100)
 light.position.set(8.01, 10.84, 9.89)
 scene.add(light)
 
+
 //Camera 
-const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.5, 100)
+const camera = new THREE.PerspectiveCamera(35, sizes.width / sizes.height, 0.5, 100)
 camera.position.z = 19
 scene.add(camera)
 
@@ -45,8 +48,7 @@ controls.enableDamping = true
 controls.enablePan = false
 controls.enableZoom = false
 controls.autoRotate = true
-controls.autoRotateSpeed = 4
-
+controls.autoRotateSpeed = 1.5
 
 //Resize
 window.addEventListener('resize', () => {
