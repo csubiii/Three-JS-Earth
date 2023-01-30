@@ -26,7 +26,7 @@ const bumpTexture = new THREE.TextureLoader().load('/bump.jpg')
 material.bumpMap = bumpTexture
 material.bumpScale = 0.1
 
-const specularTexture = new THREE.TextureLoader().load('/specularjpg')
+const specularTexture = new THREE.TextureLoader().load('/specular.jpg')
 material.specularMap = specularTexture
 material.specular = new THREE.Color('#eaf1f8')
 
